@@ -7,6 +7,8 @@ import com.qhduhu.myunion.R;
 import com.qhduhu.myunion.adapter.ImageUtils;
 import com.qhduhu.myunion.db.DBManager;
 import com.qhduhu.myunion.entity.JfEntity;
+import com.qhduhu.myunion.service.JfService;
+import com.qhduhu.myunion.service.JfServiceIMPL;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -16,14 +18,15 @@ import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AddNewJfActivity extends Activity implements OnClickListener {
 	private EditText descrp, ettype;
@@ -32,7 +35,14 @@ public class AddNewJfActivity extends Activity implements OnClickListener {
 	private Button photo, submit;
 	private ImageView img1, img2;
 	private DBManager db;
-	private LinearLayout ll;
+	private static final int FLAG_LOGIN_SUCCESS = 1;
+	private static final int FLAG_BAOCUN_SUCCESS = 2;
+	private static final String FLAG_LOAD_ERROR = "¼ÓÔØ³ö´í";
+	private static final String FLAG_BAOCUN_ERROR = "±£´æ³ö´í";
+	public static final String MSG_SAVE_FAIL = "±£´æÊ§°Ü";
+	public static final String MSG_LOAD_FAIL = "¼ÓÔØÊ§°Ü";
+	public static final String MSG_HTTP_FAIL = "ßB½Ó·þ„ÕÆ÷Ê§°Ü";
+	JfService jfser = new JfServiceIMPL();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -116,13 +126,27 @@ public class AddNewJfActivity extends Activity implements OnClickListener {
 				entity.setJf_typedescrp(ettype.getText().toString());
 			}
 			entity.setJf(3);
-			db.add(entity);
-			db.closeDB();
+			savejf(entity);
+			//db.add(entity);
+			//db.closeDB();
 			break;
 
 		default:
 			break;
 		}
+	}
+	private void savejf(final JfEntity entity) {
+		new Thread(new Runnable() {
+			public void run() {
+				
+			try {
+				jfser.updateJf(entity);
+				Log.d("asdasdads", "sucessssssssssssssssssssssssssssss");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+			}
+		}).start();
 	}
 	private Bitmap getBitmapFromIv(ImageView imageView){
 		View drawingView = imageView;

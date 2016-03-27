@@ -6,10 +6,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_margin="6dp"
-        android:background="@color/ivory"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="2dp"
+        android:orientation="vertical"
         android:paddingLeft="2dp"
         android:paddingRight="2dp" >
 
@@ -20,79 +21,95 @@
 
         <TextView
             android:id="@+id/add_tvtype"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:focusable="true"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="活动类型"
-            android:textColor="@color/navy"
-            android:textSize="18sp" />
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:gravity="center_vertical"
+            android:text="活动类型:"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/add_ettype"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
             android:background="@null"
             android:drawableBottom="@drawable/linenavy"
             android:singleLine="true" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:orientation="vertical"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp" >
 
-
-        <EditText
-            android:layout_margin="6dp"
-            android:id="@+id/addjf_etwhat"
+        <TextView
             android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center_vertical"
+            android:text="说点什么:"
+            android:textSize="16sp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <EditText
+                android:id="@+id/addjf_etwhat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawableBottom="@drawable/linenavy"
+                android:gravity="top"
+                android:maxLength="140"
+                android:minLines="3"
+                android:textColorHint="@color/darkslategray" />
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_weight="1" 
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp">
+
+        <ImageView
+            android:id="@+id/addnew_img1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/ivory"
-            android:drawableBottom="@drawable/linenavy"
-            android:gravity="top"
-            android:hint="你的感受..."
-            android:maxLength="140"
-            android:minLines="3"
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:textColorHint="@color/darkslategray" />
+            android:layout_weight="1"
+            android:clickable="true"
+            android:scaleType="centerCrop" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_marginTop="4dp">
-
-            <ImageView
-                android:id="@+id/addnew_img1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:scaleType="centerCrop"/>
-
-            <ImageView
-                android:id="@+id/addnew_img2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:layout_weight="1"
-                android:clickable="true" 
-                android:scaleType="centerCrop"/>
- 
+        <ImageView
+            android:id="@+id/addnew_img2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:scaleType="centerCrop" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp" 
-        android:gravity="bottom"
-        android:layout_gravity="bottom">
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="2dp"
+        android:gravity="bottom" >
 
         <Button
             android:id="@+id/add_photo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/login_btn"
+            android:background="@drawable/comen_btn2"
             android:text="拍照上传"
             android:textColor="@color/whitesmoke" />
 
@@ -102,7 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:layout_weight="1"
-            android:background="@drawable/login_btn"
+            android:background="@drawable/comen_btn2"
             android:text="提交积分"
             android:textColor="@color/whitesmoke" />
     </LinearLayout>
