@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.qhduhu.myunion.MainActivity" >
+
+    <item
+        android:id="@+id/menu_about"
+        android:title="@string/about"/>
+    <item
+        android:id="@+id/menu_login"
+        android:title="@string/login"/>
+
+    <item
+        android:id="@+id/menu_exit"
+        android:title="@string/menu_logout"/>
+
+</menu>

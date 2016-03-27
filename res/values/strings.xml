@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">我的工会</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">设置</string>
+    <string name="title_activity_about">关于</string>
+    <string name="title_activity_add_new_jf">新增积分</string>
+    <string name="title_activity_todo">待开发</string>
+    <string name="todo">TODO</string>
+    <string name="notime">没时间，等有时间就做</string>
+    <string name="menu_logout">退出</string>
+    <string name="about">关于</string>
+    <string name="login">登录</string>
+
+</resources>

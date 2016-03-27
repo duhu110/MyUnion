@@ -1,0 +1,56 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.qhduhu.ygjf.activity.LoginActivity" 
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/bcggg">
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:text="用户名"
+        android:textSize="12dp"
+        android:textColor="@color/blanchedalmond"/>
+    <EditText 
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:hint="手机号"
+        android:id="@+id/login_username"
+        android:background="@null"
+        android:drawableBottom="@drawable/line"
+        android:singleLine="true"/>
+       <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:textSize="12dp"
+        android:textColor="@color/blanchedalmond"
+        android:text="密码"/>
+    <EditText 
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:hint="***"
+        android:password="true"
+        android:id="@+id/login_password"
+        android:background="@null"
+        android:drawableBottom="@drawable/line"
+        android:singleLine="true"/>
+    <Button 
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/login_btn"
+       	android:background="@drawable/login_btn"
+       	android:textColor="@color/whitesmoke"
+       	android:text="登      录"
+       	android:textSize="18dp"/>
+
+
+
+</LinearLayout>

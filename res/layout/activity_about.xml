@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#479AC7">
+
+    <ImageView
+        android:id="@+id/aboutid1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/tiger" />
+
+    <TextView
+        android:id="@+id/aboutid2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/aboutid1"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="工会积分管理系统"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/aboutid3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/aboutid2"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="V1.0.0"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/aboutid4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/aboutid3"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="承接各类WEB/IOS/ANDROID/HADOOP开发"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/aboutid5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/aboutid4"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="此APP还在测试开发之中，如有问题请联系18997485868@189.cn"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/aboutid6"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/aboutid5"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="powerd by www.qhduhu.com"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/aboutid7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="Copyright © 2016 duhu All Rights Reserved."
+        android:textSize="12sp" />
+
+</RelativeLayout>

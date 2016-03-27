@@ -1,0 +1,110 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="6dp"
+        android:background="@color/ivory"
+        android:orientation="horizontal"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp" >
+
+        <View
+            android:layout_width="0dip"
+            android:layout_height="0dip"
+            android:focusableInTouchMode="true" />
+
+        <TextView
+            android:id="@+id/add_tvtype"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:focusable="true"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="活动类型"
+            android:textColor="@color/navy"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/add_ettype"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:background="@null"
+            android:drawableBottom="@drawable/linenavy"
+            android:singleLine="true" />
+    </LinearLayout>
+
+
+
+        <EditText
+            android:layout_margin="6dp"
+            android:id="@+id/addjf_etwhat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/ivory"
+            android:drawableBottom="@drawable/linenavy"
+            android:gravity="top"
+            android:hint="你的感受..."
+            android:maxLength="140"
+            android:minLines="3"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:textColorHint="@color/darkslategray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginTop="4dp">
+
+            <ImageView
+                android:id="@+id/addnew_img1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:scaleType="centerCrop"/>
+
+            <ImageView
+                android:id="@+id/addnew_img2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_weight="1"
+                android:clickable="true" 
+                android:scaleType="centerCrop"/>
+ 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp" 
+        android:gravity="bottom"
+        android:layout_gravity="bottom">
+
+        <Button
+            android:id="@+id/add_photo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/login_btn"
+            android:text="拍照上传"
+            android:textColor="@color/whitesmoke" />
+
+        <Button
+            android:id="@+id/add_submit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/login_btn"
+            android:text="提交积分"
+            android:textColor="@color/whitesmoke" />
+    </LinearLayout>
+
+</LinearLayout>
