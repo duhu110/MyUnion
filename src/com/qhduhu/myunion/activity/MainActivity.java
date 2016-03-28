@@ -65,7 +65,7 @@ public class MainActivity extends FragmentActivity implements TabListener {
 
 				list = gettxllist.getTXLList();
 				db = new DBManager(getApplicationContext());
-				Log.d(TAG, list.get(3).txl_name);
+			//	Log.d(TAG, list.get(3).txl_name);
 				db.DeleteTXL();
 				db.addtxl(list);
 				db.closeDB();

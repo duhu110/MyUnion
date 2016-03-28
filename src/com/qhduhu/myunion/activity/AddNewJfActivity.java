@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 
 import com.qhduhu.myunion.R;
 import com.qhduhu.myunion.adapter.ImageUtils;
-import com.qhduhu.myunion.db.DBManager;
 import com.qhduhu.myunion.entity.JfEntity;
 import com.qhduhu.myunion.service.JfService;
 import com.qhduhu.myunion.service.JfServiceIMPL;
@@ -26,7 +25,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class AddNewJfActivity extends Activity implements OnClickListener {
 	private EditText descrp, ettype;
@@ -34,11 +32,11 @@ public class AddNewJfActivity extends Activity implements OnClickListener {
 	private int typeCode = 0;
 	private Button photo, submit;
 	private ImageView img1, img2;
-	private DBManager db;
-	private static final int FLAG_LOGIN_SUCCESS = 1;
-	private static final int FLAG_BAOCUN_SUCCESS = 2;
-	private static final String FLAG_LOAD_ERROR = "加载出错";
-	private static final String FLAG_BAOCUN_ERROR = "保存出错";
+//	private DBManager db;
+//	private static final int FLAG_LOGIN_SUCCESS = 1;
+//	private static final int FLAG_BAOCUN_SUCCESS = 2;
+//	private static final String FLAG_LOAD_ERROR = "加载出错";
+//	private static final String FLAG_BAOCUN_ERROR = "保存出错";
 	public static final String MSG_SAVE_FAIL = "保存失败";
 	public static final String MSG_LOAD_FAIL = "加载失败";
 	public static final String MSG_HTTP_FAIL = "連接服務器失败";
@@ -100,7 +98,7 @@ public class AddNewJfActivity extends Activity implements OnClickListener {
 			ImageUtils.ShowImagePickDialog(this);
 			break;
 		case R.id.add_submit:
-			db = new DBManager(this);
+//			db = new DBManager(this);
 			byte[] pic1, pic2;
 			JfEntity entity = new JfEntity();
 			if (img1.getDrawable() != null) {

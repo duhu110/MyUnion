@@ -9,6 +9,7 @@ public class JfEntity {
 	    public byte[] jf_pic1;
 	    public byte[] jf_pic2;
 	    public int jf;
+	    
 
 	    public JfEntity() {
 		}

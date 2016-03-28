@@ -136,4 +136,12 @@ public class DBManager {
 		db.close();
 	}
 
+	public int queryJFlastId() {
+		Cursor c = db.rawQuery("SELECT * FROM jf ORDER BY _id DESC", null);
+		if (c.moveToNext()) {
+			return c.getInt(c.getColumnIndex("_id"));
+		}
+		return 0;
+	}
+
 }

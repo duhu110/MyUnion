@@ -1,11 +1,15 @@
 package com.qhduhu.myunion.fragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.qhduhu.myunion.R;
 import com.qhduhu.myunion.adapter.JfListAdapter;
 import com.qhduhu.myunion.db.DBManager;
 import com.qhduhu.myunion.entity.JfEntity;
+import com.qhduhu.myunion.service.JfService;
+import com.qhduhu.myunion.service.JfServiceIMPL;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,6 +26,7 @@ public class PYQFragment extends Fragment implements OnRefreshListener {
 	private JfListAdapter adapter;
 	private SwipeRefreshLayout mSwipeLayout;
 	private DBManager db;
+	private JfService jfser = new JfServiceIMPL();
 
 
 	@SuppressLint("InflateParams")
@@ -46,14 +51,39 @@ public class PYQFragment extends Fragment implements OnRefreshListener {
 	}
 
 	private void getData() {
-		List<JfEntity> list;
+		List<JfEntity> list = new ArrayList<JfEntity>();
+		getAndSavePYQ thread = new getAndSavePYQ();
+		thread.start();
 		db = new DBManager(getActivity());
 		list = db.query();
-		Log.d("getdata", list.get(1).jf_descrp);
 		db.closeDB();
 		adapter = new JfListAdapter(getActivity(), list);
 	}
-
+	class getAndSavePYQ extends Thread{
+		List<JfEntity> list = new ArrayList<JfEntity>();
+		@Override
+		public void run() {
+			db = new DBManager(getActivity());
+			final int lastid = db.queryJFlastId();
+			Log.d("lastidddddddddddddddddddddddddd", String.valueOf(lastid));
+			
+			if (lastid == 0) {
+				return;
+			}
+			try {
+				db = new DBManager(getActivity());
+				list = jfser.getJfs(lastid);
+				for (JfEntity entity:list) {
+					 db.add(entity);
+				}
+				//db.closeDB();
+			} catch (Exception e) {
+				e.printStackTrace();
+				//db.closeDB();
+			}
+		}
+		
+	}
 	@Override
 	public void setUserVisibleHint(boolean isVisibleToUser) {
 		// TODO Auto-generated method stub
@@ -72,7 +102,7 @@ public class PYQFragment extends Fragment implements OnRefreshListener {
 		db = new DBManager(getActivity());
 		list = db.query();
 		Log.d("getdata", list.get(0).jf_descrp);
-		db.closeDB();
+		//db.closeDB();
 		adapter = new JfListAdapter(getActivity(), list);
 		//listView.invalidateViews();
 		listView.setAdapter(adapter);
@@ -84,4 +114,5 @@ public class PYQFragment extends Fragment implements OnRefreshListener {
 		mSwipeLayout.setRefreshing(false);
 
 	}
+	
 }
