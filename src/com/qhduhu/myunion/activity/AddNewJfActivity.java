@@ -10,6 +10,7 @@ import com.qhduhu.myunion.service.JfService;
 import com.qhduhu.myunion.service.JfServiceIMPL;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,7 +18,8 @@ import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
+import android.os.Message;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,6 +27,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AddNewJfActivity extends Activity implements OnClickListener {
 	private EditText descrp, ettype;
@@ -32,9 +35,12 @@ public class AddNewJfActivity extends Activity implements OnClickListener {
 	private int typeCode = 0;
 	private Button photo, submit;
 	private ImageView img1, img2;
+	private static ProgressDialog dialog;
+	MHandler mHandler = new MHandler();
 //	private DBManager db;
 //	private static final int FLAG_LOGIN_SUCCESS = 1;
-//	private static final int FLAG_BAOCUN_SUCCESS = 2;
+	private static final int FLAG_BAOCUN_SUCCESS = 2;
+	private static final int FLAG_BAOCUN_UNSUCCESS = 3;
 //	private static final String FLAG_LOAD_ERROR = "加载出错";
 //	private static final String FLAG_BAOCUN_ERROR = "保存出错";
 	public static final String MSG_SAVE_FAIL = "保存失败";
@@ -98,7 +104,10 @@ public class AddNewJfActivity extends Activity implements OnClickListener {
 			ImageUtils.ShowImagePickDialog(this);
 			break;
 		case R.id.add_submit:
-//			db = new DBManager(this);
+			dialog = new ProgressDialog(AddNewJfActivity.this) ;
+			dialog.setMessage("上传中");
+			dialog.setCancelable(false);
+			dialog.show();
 			byte[] pic1, pic2;
 			JfEntity entity = new JfEntity();
 			if (img1.getDrawable() != null) {
@@ -138,13 +147,42 @@ public class AddNewJfActivity extends Activity implements OnClickListener {
 			public void run() {
 				
 			try {
-				jfser.updateJf(entity);
-				Log.d("asdasdads", "sucessssssssssssssssssssssssssssss");
+				if (jfser.updateJf(entity)) {
+					
+					mHandler.sendEmptyMessage(FLAG_BAOCUN_SUCCESS);
+					dialog.dismiss();
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
+				mHandler.sendEmptyMessage(FLAG_BAOCUN_UNSUCCESS);
 			}	
 			}
 		}).start();
+	}
+	class MHandler extends Handler{
+
+		@Override
+		public void handleMessage(Message msg) {
+			if (dialog != null) {
+				dialog.dismiss();
+			}
+			switch (msg.what) {
+			case FLAG_BAOCUN_SUCCESS:
+				showtip("保存成功！");
+				break;
+			case FLAG_BAOCUN_UNSUCCESS:
+				showtip("保存失败！");
+				break;
+
+			default:
+				break;
+			}
+			
+		}
+		
+	}
+	private void showtip(String str) {
+		Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
 	}
 	private Bitmap getBitmapFromIv(ImageView imageView){
 		View drawingView = imageView;
@@ -205,18 +243,9 @@ public class AddNewJfActivity extends Activity implements OnClickListener {
 		}
 	}
 
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.add_new_jf, menu);
-//		return true;
-//	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			finish();

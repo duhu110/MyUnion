@@ -5,5 +5,5 @@ import java.util.List;
 import com.qhduhu.myunion.entity.TXLEntity;
 
 public interface GetTXLListService {
-	public List<TXLEntity> getTXLList() throws Exception;
+	public List<TXLEntity> getTXLList(int lastid) throws Exception;
 }

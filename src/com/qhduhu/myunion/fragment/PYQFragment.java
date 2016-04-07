@@ -12,6 +12,8 @@ import com.qhduhu.myunion.service.JfServiceIMPL;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
@@ -20,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class PYQFragment extends Fragment implements OnRefreshListener {
 	private ListView listView;
@@ -27,7 +30,9 @@ public class PYQFragment extends Fragment implements OnRefreshListener {
 	private SwipeRefreshLayout mSwipeLayout;
 	private DBManager db;
 	private JfService jfser = new JfServiceIMPL();
-
+	private static final int FLAG_LOAD_SUCCESS = 1;
+	private static final int FLAG_LOAD_UNSUCCESS = 2;
+	MyHandler myhandler = new MyHandler();
 
 	@SuppressLint("InflateParams")
 	@Override
@@ -56,7 +61,7 @@ public class PYQFragment extends Fragment implements OnRefreshListener {
 		thread.start();
 		db = new DBManager(getActivity());
 		list = db.query();
-		db.closeDB();
+		//db.closeDB();
 		adapter = new JfListAdapter(getActivity(), list);
 	}
 	class getAndSavePYQ extends Thread{
@@ -65,24 +70,44 @@ public class PYQFragment extends Fragment implements OnRefreshListener {
 		public void run() {
 			db = new DBManager(getActivity());
 			final int lastid = db.queryJFlastId();
-			Log.d("lastidddddddddddddddddddddddddd", String.valueOf(lastid));
-			
-			if (lastid == 0) {
-				return;
-			}
+			Log.d("lastidddddddddddddddddddddddddd", String.valueOf(lastid));		
 			try {
 				db = new DBManager(getActivity());
 				list = jfser.getJfs(lastid);
 				for (JfEntity entity:list) {
 					 db.add(entity);
 				}
-				//db.closeDB();
+				db.closeDB();
+				myhandler.sendEmptyMessage(FLAG_LOAD_SUCCESS);
 			} catch (Exception e) {
 				e.printStackTrace();
-				//db.closeDB();
+				db.closeDB();
+				myhandler.sendEmptyMessage(FLAG_LOAD_UNSUCCESS);
 			}
 		}
 		
+	}
+	@SuppressLint("HandlerLeak")
+	class MyHandler extends Handler{
+
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case FLAG_LOAD_SUCCESS:
+				showtip("朋友圈加载成功");
+				break;
+			case FLAG_LOAD_UNSUCCESS:
+				showtip("朋友圈加载失败");
+				break;
+
+			default:
+				break;
+			}
+		}
+		
+	}
+	private void showtip(String str) {
+		Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
 	}
 	@Override
 	public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -101,7 +126,7 @@ public class PYQFragment extends Fragment implements OnRefreshListener {
 		List<JfEntity> list;
 		db = new DBManager(getActivity());
 		list = db.query();
-		Log.d("getdata", list.get(0).jf_descrp);
+		//Log.d("getdata", list.get(0).jf_descrp);
 		//db.closeDB();
 		adapter = new JfListAdapter(getActivity(), list);
 		//listView.invalidateViews();
@@ -110,7 +135,7 @@ public class PYQFragment extends Fragment implements OnRefreshListener {
 		Log.d("下拉熟悉", "数据更新成功");
 		//listView.invalidateViews();
 	//	Log.d("下拉熟悉", "数据更新成功");
-		db.closeDB();
+	//	db.closeDB();
 		mSwipeLayout.setRefreshing(false);
 
 	}

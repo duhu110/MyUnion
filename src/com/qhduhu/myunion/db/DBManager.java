@@ -143,5 +143,12 @@ public class DBManager {
 		}
 		return 0;
 	}
+	public int queryTXLlastId() {
+		Cursor c = db.rawQuery("SELECT * FROM txl ORDER BY id DESC", null);
+		if (c.moveToNext()) {
+			return c.getInt(c.getColumnIndex("id"));
+		}
+		return 0;
+	}
 
 }

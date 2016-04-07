@@ -20,12 +20,13 @@ import android.util.Log;
 public class GetTXLListServiceIMPL implements GetTXLListService{
 
 	@Override
-	public List<TXLEntity> getTXLList() throws Exception {
+	public List<TXLEntity> getTXLList(int lastid) throws Exception {
 		System.out.println("excuse gettxllist metho");
-		List<TXLEntity> txlEntities = new ArrayList<TXLEntity>();
 		
+		List<TXLEntity> txlEntities = new ArrayList<TXLEntity>();
 		HttpClient client = new DefaultHttpClient();
-		String uri = "http://192.168.31.211:8080/YGJFServer/GetTXLList.do";
+		String uri = "http://101.200.183.19/MyUnion/getTXLData.php?lastid="+lastid;
+		Log.d("gettxllllllllllllllllll", uri);
 		HttpGet get = new HttpGet(uri);
 		HttpResponse response = client.execute(get);
 		int statuscode = response.getStatusLine().getStatusCode();
@@ -33,20 +34,16 @@ public class GetTXLListServiceIMPL implements GetTXLListService{
 		if (statuscode != HttpStatus.SC_OK) {
 			throw new ServiceRulesException("更新通讯录服务器连接失败");
 		}
-
 		String result = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
-		
-		JSONArray array = new JSONArray(result);
+			JSONArray array = new JSONArray(result);
 		
 		for (int i = 0; i < array.length(); i++) {
 			
 			JSONObject jsontxllist = array.getJSONObject(i);
-			
 			String name = jsontxllist.getString("txl_name");
 			String dept = jsontxllist.getString("txl_dept");
 			String tel = jsontxllist.getString("txl_tel");
 			String mail = jsontxllist.getString("txl_mail");
-			
 			txlEntities.add(new TXLEntity(name,dept,tel,mail));
 		}
 		
